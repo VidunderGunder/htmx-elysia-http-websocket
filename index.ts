@@ -36,23 +36,21 @@ const app = new Elysia()
         typeof message !== "object" ||
         message === null ||
         !("counter_action" in message)
-      )
+      ) {
         return;
+      }
 
       switch (message.counter_action) {
         case "up":
-          console.log("up");
           app.server?.publish("count", `<span id="ws-counter">${up(2)}</span>`);
           break;
         case "down":
-          console.log("down");
           app.server?.publish(
             "count",
             `<span id="ws-counter">${down(2)}</span>`
           );
           break;
         case "reset":
-          console.log("reset");
           app.server?.publish(
             "count",
             `<span id="ws-counter">${reset(2)}</span>`

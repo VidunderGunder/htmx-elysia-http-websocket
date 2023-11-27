@@ -1,15 +1,9 @@
-# Elysia with Bun runtime
+# 🔬 HTMX + Elysia (Bun) + HTTP + WebSockets
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+Experiment with [HTMX](https://htmx.org/) and [Elysia](https://elysiajs.com/) (Bun), playing around with HTTP and WebSockets.
+
+I wanted to jump on the hype train and get back to the web basics, after being unhappy with the direction all of the frameworks are going.
+
 ```bash
-bun create elysia ./elysia-example
+bun dev
 ```
-
-## Development
-To start the development server run:
-```bash
-bun run dev
-```
-
-Open http://localhost:3000/ with your browser to see the result.

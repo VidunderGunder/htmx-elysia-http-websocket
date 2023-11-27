@@ -132,22 +132,22 @@ function isCountRow(row: unknown): row is Count {
 }
 
 function countFromDB(id: ID): number {
-  const row = db.query(`select * from count where ${id}`).get();
+  const row = db.query(`select * from count where id = ${id}`).get();
   if (isCountRow(row)) return row.value;
   throw new Error("Count not found");
 }
 
 function get(id: ID): number {
-  const row = db.query(`select * from count where ${id}`).get();
+  const row = db.query(`select * from count where id = ${id}`).get();
   if (isCountRow(row)) return row.value;
   return 0;
 }
 function up(id: ID): number {
-  db.run(`update count set value = value + 1 where ${id}`);
+  db.run(`update count set value = value + 1 where id = ${id}`);
   return countFromDB(id);
 }
 function down(id: ID): number {
-  db.run(`update count set value = value - 1 where ${id}`);
+  db.run(`update count set value = value - 1 where id = ${id}`);
   return countFromDB(id);
 }
 function reset(id: ID): number {

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+    <link
+      href="http://localhost:4321/public/pico.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #1f1f28;
+        color: #fff;
+      }
+
+      button,
+      input {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: none;
+        background-color: rgba(200, 200, 255, 0.04);
+        color: #fff;
+        font-weight: 900;
+        cursor: pointer;
+        user-select: none;
+      }
+      button:hover,
+      input:hover {
+        background-color: rgba(200, 200, 255, 0.05);
+      }
+      button:active,
+      input:active {
+        background-color: transparent;
+        box-shadow: 0 0 0 2px rgba(200, 200, 255, 0.03);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        gap: 2rem;
+      "
+    >
+      <!-- HTTP -->
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0.25rem;
+        "
+      >
+        <h3>HTTP</h3>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+          "
+        >
+          <button
+            hx-put="http://localhost:4321/api/down"
+            hx-target="#http-counter"
+          >
+            -
+          </button>
+          <div
+            id="http-counter"
+            hx-get="http://localhost:4321/api/count"
+            hx-trigger="load"
+            hx-swap="innerHTML"
+            style="width: 1rem; text-align: center"
+          ></div>
+          <button
+            hx-put="http://localhost:4321/api/up"
+            hx-target="#http-counter"
+          >
+            +
+          </button>
+        </div>
+        <button
+          style="width: 100%"
+          hx-put="http://localhost:4321/api/reset"
+          hx-target="#http-counter"
+        >
+          reset
+        </button>
+      </div>
+
+      <!-- WebSocket -->
+      <div hx-ws="connect:/api/ws-count">
+        <form hx-ws="send">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 0.25rem;
+            "
+          >
+            <h3>WebSocket</h3>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 0.75rem;
+              "
+            >
+              <input
+                type="submit"
+                value="down"
+                name="counter_action"
+                hx-ws="send"
+              />
+
+              <div
+                hx-trigger="load"
+                hx-swap="innerHTML"
+                style="width: 1rem; text-align: center"
+              >
+                <span id="ws-counter"></span>
+              </div>
+              <input
+                type="submit"
+                value="up"
+                name="counter_action"
+                hx-ws="send"
+              />
+            </div>
+            <input
+              style="width: 100%"
+              type="submit"
+              value="reset"
+              name="counter_action"
+              hx-ws="send"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

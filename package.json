@@ -3,13 +3,16 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --hot index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^0.7.2",
+    "@elysiajs/html": "^0.7.3",
+    "elysia": "latest",
+    "htmx.org": "^1.9.9"
   },
   "devDependencies": {
     "bun-types": "latest"
   },
-  "module": "src/index.js"
+  "module": "index.js"
 }
